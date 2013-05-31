@@ -15,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class TcBwSuroTests {
 
 	private WebDriver driver;
-	private String baseUrl="http://www.tc-blauweiss-suro.de/";
+	private String baseUrl="XXX";
 	
 	@Before
 	public void setUp() throws Exception {

@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class SkpTests {
 
 	private WebDriver driver;
-	private String baseUrl="http://localhost/website_skp_zend/public/";
+	private String baseUrl="XXX";
 	
 	@Before
 	public void setUp() throws Exception {
