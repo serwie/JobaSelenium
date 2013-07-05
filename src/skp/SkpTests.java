@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class SkpTests {
 
 	private WebDriver driver;
-	private String baseUrl="XXX";
+	private String baseUrl = "http://zendskeletonapplication.localhost/";
 	
 	@Before
 	public void setUp() throws Exception {
@@ -22,7 +22,16 @@ public class SkpTests {
 	}
 	
 	@Test
-	public void testIndex(){
+	public void testIndex(){ // done
+		String cssSelectorString = "h1";
+		WebElement contentH1 = driver.findElement(By.cssSelector(cssSelectorString));
+		String act = contentH1.getText();
+		String exp = "Willkommen bei der SKP Technik GmbH";
+		assertEquals("SkpTests.testIndex()", exp, act);
+	}
+	
+	@Test
+	public void testTest(){ // done
 		String cssSelectorString = "h1";
 		WebElement contentH1 = driver.findElement(By.cssSelector(cssSelectorString));
 		String act = contentH1.getText();

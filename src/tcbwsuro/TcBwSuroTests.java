@@ -1,8 +1,6 @@
 package tcbwsuro;
 
-import static org.junit.Assert.*;
-
-import java.util.concurrent.TimeUnit;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class TcBwSuroTests {
 
 	private WebDriver driver;
-	private String baseUrl="XXX";
+	private String baseUrl = "http://localhost/bwsuro";
 	
 	@Before
 	public void setUp() throws Exception {
