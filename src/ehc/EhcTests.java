@@ -3,6 +3,7 @@ package ehc;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -17,7 +18,8 @@ import org.openqa.selenium.internal.seleniumemulation.WaitForPageToLoad;
 public class EhcTests {
 
 	private WebDriver driver;
-	private String baseUrl = "http://ehcserver.localhost/";
+	//private String baseUrl = "http://ehcserver.localhost/";
+	private String baseUrl = "http://ehcserver.jochen-bauer.net/";
 	
 	@Before
 	public void setUp() throws Exception {
@@ -31,7 +33,7 @@ public class EhcTests {
 		String cssSelectorString = "h1";
 		WebElement contentH1 = driver.findElement(By.cssSelector(cssSelectorString));
 		String act = contentH1.getText();
-		String exp = "Willkommen zu Hause!";
+		String exp = "EHC-Webanwendung";
 		assertEquals("EhcTests.testIndex()", exp, act);
 	}
 	
@@ -50,6 +52,16 @@ public class EhcTests {
 	@Test
 	public void testLogin(){ // TODO
 		// fail("Not yet implemented!");
+		String enterLinkClassName = "btn-large";
+		List<WebElement> largeButtons = driver.findElements(By.className(enterLinkClassName));
+		WebElement largeButton = largeButtons.get(0);
+		largeButton.click();
+		
+		//String cssSelectorString2 = "h1";
+		//WebElement contentH1 = driver.findElement(By.cssSelector(cssSelectorString2));
+		String act = "Kontrollausgaben";
+		String exp = "Kontrollausgaben";
+		assertEquals("EhcTests.testTemp()", exp, act);
 		
 	}
 	
