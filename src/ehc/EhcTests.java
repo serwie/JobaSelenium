@@ -53,9 +53,12 @@ public class EhcTests {
 
 	@Test
 	public void testLoginButton() { // TODO
-		// fail("Not yet implemented!");
+		/**
+		 * Methode, um zu überprüfen, ob man nach dem Drücken des "Eintreten"
+		 * Buttons auf der Login Seite landet.
+		 */
 
-	
+		// fail("Not yet implemented!");
 
 		// Suchen aller großen Knöpfe auf der Seite
 		String enterLinkClassName = "btn-large";
@@ -78,7 +81,11 @@ public class EhcTests {
 	}
 
 	@Test
-	public void testLogIn() {
+	public void testRightLogIn() {
+		/**
+		 * Methode, um zu überprüfen, ob man nach der Eingabe der RICHTIGEN
+		 * Login Daten im Cockpit Menue landet.
+		 */
 
 		// Suchen aller großen Knöpfe auf der Seite
 		String enterLinkClassName = "btn-large";
@@ -119,6 +126,57 @@ public class EhcTests {
 	}
 
 	@Test
+	public void testFalseLogIn() {
+		/**
+		 * Methode, um zu überprüfen, dass man nach der Eingabe der FALSCHEN
+		 * Login Daten NICHT im Cockpit Menue landet.
+		 */
+
+		// Suchen aller großen Knöpfe auf der Seite
+		String enterLinkClassName = "btn-large";
+		List<WebElement> largeButtons = driver.findElements(By
+				.className(enterLinkClassName));
+		WebElement largeButton = largeButtons.get(0);
+
+		// Klicken auf den ersten Knopf (der Knopf "Eintreten")
+		largeButton.click();
+
+		// Man befindet sich nun auf der Seite, wo man die Email und das
+		// Passwort eingeben muss
+
+		// Finden des Email Elements
+		WebElement email = driver.findElement(By.name("identity"));
+		// Eingeben der Email
+		email.sendKeys("someone@somewhere.net");
+
+		// Finden des Passwort Elements
+		WebElement passwort = driver.findElement(By.name("credential"));
+		// Eingeben des Passworts
+		passwort.sendKeys("passwort");
+
+		// Drücken auf das "Eingabe" Feld
+		passwort.submit();
+
+		// Hier sollte man eingeloggt sein (Überprüfung über h1)
+		String cssSelectorString = "h1";
+
+		WebElement h1Title = driver.findElement(By
+				.cssSelector(cssSelectorString));
+
+		String act = h1Title.getText();
+		String exp = "Cockpit";
+
+		boolean unequal = false;
+
+		if (act.compareTo(exp) != 0) {
+			unequal = true;
+		}
+
+		assertTrue(unequal);
+
+	}
+
+	@Test
 	public void testTest() { // done
 		String cssSelectorString = "h1";
 		WebElement contentH1 = driver.findElement(By
@@ -130,7 +188,7 @@ public class EhcTests {
 
 	@After
 	public void tearDown() throws Exception {
-		 driver.quit();
+		driver.quit();
 	}
 
 }
