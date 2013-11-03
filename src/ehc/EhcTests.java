@@ -17,7 +17,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class EhcTests {
 
 	private WebDriver driver;
-	// private String baseUrl = "http://ehcserver.localhost/";
+	// private String baseUrl = "http://ehcserver.localhost/" ;
 	private String baseUrl = "http://ehcserver.jochen-bauer.net/";
 
 	@Before
