@@ -39,7 +39,7 @@ public class EhcTests {
 	}
 
 	@Test
-	public void testTemp() { // done
+	public void testTemp() { // TODO
 		String idString = "temp";
 		WebElement linkTemp = driver.findElement(By.id(idString));
 		linkTemp.click();
@@ -51,15 +51,13 @@ public class EhcTests {
 		assertEquals("EhcTests.testTemp()", exp, act);
 	}
 
+	/**
+	 * Methode, um zu überprüfen, ob man nach dem Drücken des "Eintreten"
+	 * Buttons auf der Login Seite landet.
+	 */
 	@Test
-	public void testLoginButton() { // TODO
-		/**
-		 * Methode, um zu überprüfen, ob man nach dem Drücken des "Eintreten"
-		 * Buttons auf der Login Seite landet.
-		 */
-
+	public void testLoginButton(){ // done
 		// fail("Not yet implemented!");
-
 		// Suchen aller großen Knöpfe auf der Seite
 		String enterLinkClassName = "btn-large";
 		List<WebElement> largeButtons = driver.findElements(By
@@ -81,7 +79,7 @@ public class EhcTests {
 	}
 
 	@Test
-	public void testRightLogIn() {
+	public void testRightLogIn() { // done
 		/**
 		 * Methode, um zu überprüfen, ob man nach der Eingabe der RICHTIGEN
 		 * Login Daten im Cockpit Menue landet.
@@ -126,7 +124,7 @@ public class EhcTests {
 	}
 
 	@Test
-	public void testFalseLogIn() {
+	public void testFalseLogIn(){ // done
 		/**
 		 * Methode, um zu überprüfen, dass man nach der Eingabe der FALSCHEN
 		 * Login Daten NICHT im Cockpit Menue landet.
