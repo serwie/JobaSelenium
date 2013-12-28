@@ -17,6 +17,7 @@ import org.openqa.selenium.internal.seleniumemulation.WaitForPageToLoad;
 
 public class JobaTests {
 
+	// Selenium-Version 2.39
 	private WebDriver driver;
 	private String baseUrl = "http://devjoba.jochen-bauer.net/";
 
@@ -30,10 +31,9 @@ public class JobaTests {
 	@Test
 	public void testIndex() { // done
 		String cssSelectorString = "h1";
-		WebElement contentH1 = driver.findElement(By
-				.cssSelector(cssSelectorString));
+		WebElement contentH1 = driver.findElement(By.cssSelector(cssSelectorString));
 		String act = contentH1.getText();
-		String exp = "Willkommen!";
+		String exp = "Index";
 		assertEquals("JobaTests.testIndex()", exp, act);
 	}
 	
