@@ -18,8 +18,9 @@ import org.openqa.selenium.internal.seleniumemulation.WaitForPageToLoad;
 public class EhcTests {
 
 	private WebDriver driver;
-	// private String baseUrl = "http://ehcserver.localhost/";
 	private String baseUrl = "http://ehcserver.jochen-bauer.net/";
+	private String username = "XXX";
+	private String password = "XXX";
 
 	@Before
 	public void setUp() throws Exception {
@@ -29,131 +30,39 @@ public class EhcTests {
 	}
 
 	@Test
-	public void testIndex() { // done
+	public void testIndex() { // test call url with login
 		String cssSelectorString = "h1";
-		WebElement contentH1 = driver.findElement(By
-				.cssSelector(cssSelectorString));
+		WebElement contentH1 = driver.findElement(By.cssSelector(cssSelectorString));
 		String act = contentH1.getText();
 		String exp = "Einloggen";
 		assertEquals("EhcTests.testIndex()", exp, act);
 	}
 
 	@Test
-	public void testTemp() { // method for temporary development
-		String idString = "temp";
-		WebElement linkTemp = driver.findElement(By.id(idString));
-		linkTemp.click();
-		String cssSelectorString2 = "h1";
-		WebElement contentH1 = driver.findElement(By
-				.cssSelector(cssSelectorString2));
-		String act = contentH1.getText();
-		String exp = "Kontrollausgaben";
-		assertEquals("EhcTests.testTemp()", exp, act);
-	}
-
-	/**
-	 * Methode, um zu überprüfen, ob man nach dem Drücken des "Eintreten"
-	 * Buttons auf der Login Seite landet.
-	 */
-	@Test
-	public void testLoginButton(){ // done
-		// fail("Not yet implemented!");
-		// Suchen aller großen Knöpfe auf der Seite
-		String enterLinkClassName = "btn-large";
-		List<WebElement> largeButtons = driver.findElements(By
-				.className(enterLinkClassName));
-		WebElement largeButton = largeButtons.get(0);
-
-		// Klicken auf den ersten Knopf (der Knopf "Eintreten")
-		largeButton.click();
-
-		// Überprüfen, ob man danach auf der LogIn Seite landet
-		String cssSelectorString2 = "h1";
-		WebElement contentH1 = driver.findElement(By
-				.cssSelector(cssSelectorString2));
-		String act = contentH1.getText();
-		String exp = "Einloggen";
-
-		assertEquals("EhcTests.testTemp()", exp, act);
-
-	}
-
-	@Test
-	public void testRightLogIn() { // done
-		/**
-		 * Methode, um zu überprüfen, ob man nach der Eingabe der RICHTIGEN
-		 * Login Daten im Cockpit Menue landet.
-		 */
-
-		// Suchen aller großen Knöpfe auf der Seite
-		String enterLinkClassName = "btn-large";
-		List<WebElement> largeButtons = driver.findElements(By
-				.className(enterLinkClassName));
-		WebElement largeButton = largeButtons.get(0);
-
-		// Klicken auf den ersten Knopf (der Knopf "Eintreten")
-		largeButton.click();
-
-		// Man befindet sich nun auf der Seite, wo man die Email und das
-		// Passwort eingeben muss
-
-		// Finden des Email Elements
+	public void testLogin() { 
 		WebElement email = driver.findElement(By.name("identity"));
-		// Eingeben der Email
-		email.sendKeys("guest@jochen-bauer.net");
-
-		// Finden des Passwort Elements
+		email.sendKeys(this.username);
 		WebElement passwort = driver.findElement(By.name("credential"));
-		// Eingeben des Passworts
-		passwort.sendKeys("geheim");
-
-		// Drücken auf das "Eingabe" Feld
+		passwort.sendKeys(this.password);
 		passwort.submit();
-
-		// Hier sollte man eingeloggt sein (Überprüfung über h1)
 		String cssSelectorString = "h1";
-
-		WebElement h1Title = driver.findElement(By
-				.cssSelector(cssSelectorString));
-
+		WebElement h1Title = driver.findElement(By.cssSelector(cssSelectorString));
 		String act = h1Title.getText();
-		String exp = "Cockpit";
-
+		String exp = "Willkommen!";
 		assertEquals("LogIn Test", exp, act);
-
 	}
 
 	@Test
-	public void testFalseLogIn(){ // done
-		/**
-		 * Methode, um zu überprüfen, dass man nach der Eingabe der FALSCHEN
-		 * Login Daten NICHT im Cockpit Menue landet.
-		 */
-		// Suchen aller großen Knöpfe auf der Seite
-		String enterLinkClassName = "btn-large";
-		List<WebElement> largeButtons = driver.findElements(By
-				.className(enterLinkClassName));
-		WebElement largeButton = largeButtons.get(0);
-		// Klicken auf den ersten Knopf (der Knopf "Eintreten")
-		largeButton.click();
-		// Man befindet sich nun auf der Seite, wo man die Email und das
-		// Passwort eingeben muss
-		// Finden des Email Elements
+	public void testLoginFalse(){ // done, // TODO more tests
 		WebElement email = driver.findElement(By.name("identity"));
-		// Eingeben der Email
 		email.sendKeys("someone@somewhere.net");
-		// Finden des Passwort Elements
 		WebElement passwort = driver.findElement(By.name("credential"));
-		// Eingeben des Passworts
 		passwort.sendKeys("passwort");
-		// Drücken auf das "Eingabe" Feld
 		passwort.submit();
-		// Hier sollte man eingeloggt sein (Überprüfung über h1)
 		String cssSelectorString = "h1";
-		WebElement h1Title = driver.findElement(By
-				.cssSelector(cssSelectorString));
+		WebElement h1Title = driver.findElement(By.cssSelector(cssSelectorString));
 		String act = h1Title.getText();
-		String exp = "Cockpit";
+		String exp = "Willkommen!";
 		boolean unequal = false;
 		if (act.compareTo(exp) != 0) {
 			unequal = true;
@@ -163,11 +72,11 @@ public class EhcTests {
 
 	@Test
 	public void testTest() { // done
+		driver.get(baseUrl + "ehometest");
 		String cssSelectorString = "h1";
-		WebElement contentH1 = driver.findElement(By
-				.cssSelector(cssSelectorString));
+		WebElement contentH1 = driver.findElement(By.cssSelector(cssSelectorString));
 		String act = contentH1.getText();
-		String exp = "Willkommen zu Hause!";
+		String exp = "Test";
 		assertEquals("EhcTests.testTest()", exp, act);
 	}
 	
@@ -176,6 +85,17 @@ public class EhcTests {
 		fail("Not yet implemented!");
 	}
 
+	@Test
+	public void testEhomeJson(){
+		//fail("Not yet implemented!");
+		driver.get(baseUrl + "ehomejson");
+		WebElement body = driver.findElement(By.name("body"));
+		String exp = "{\"connection\":\"ok\"}";
+		String act = body.getText();
+		assertEquals("EhcTests.testEhomeJson()", exp, act);
+		
+	}
+	
 	@After
 	public void tearDown() throws Exception {
 		driver.quit();
