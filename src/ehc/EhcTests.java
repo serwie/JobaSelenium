@@ -86,9 +86,10 @@ public class EhcTests {
 	public void testEhomeJson(){
 		//fail("Not yet implemented!");
 		driver.get(baseUrl + "ehomejson");
-		WebElement body = driver.findElement(By.name("body"));
+		String cssSelectorString = "pre";
+		WebElement pre = driver.findElement(By.cssSelector(cssSelectorString));
 		String exp = "{\"connection\":\"ok\"}";
-		String act = body.getText();
+		String act = pre.getText();
 		assertEquals("EhcTests.testEhomeJson()", exp, act);
 	}
 	
