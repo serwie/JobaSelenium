@@ -1,9 +1,7 @@
 package ehc;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -13,18 +11,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.internal.seleniumemulation.WaitForPageToLoad;
 
 public class EhcTests {
 
 	private WebDriver driver;
 	private String baseUrl = "http://ehcserver.jochen-bauer.net/";
-	private String username = "XXX";
-	private String password = "XXX";
+	private EhcTestsConfig config; 
 
 	@Before
 	public void setUp() throws Exception {
 		driver = new FirefoxDriver();
+		config = new EhcTestsConfig();
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		driver.get(baseUrl);
 	}
@@ -41,9 +38,9 @@ public class EhcTests {
 	@Test
 	public void testLogin() { 
 		WebElement email = driver.findElement(By.name("identity"));
-		email.sendKeys(this.username);
+		email.sendKeys(config.username);
 		WebElement passwort = driver.findElement(By.name("credential"));
-		passwort.sendKeys(this.password);
+		passwort.sendKeys(config.password);
 		passwort.submit();
 		String cssSelectorString = "h1";
 		WebElement h1Title = driver.findElement(By.cssSelector(cssSelectorString));
@@ -93,7 +90,6 @@ public class EhcTests {
 		String exp = "{\"connection\":\"ok\"}";
 		String act = body.getText();
 		assertEquals("EhcTests.testEhomeJson()", exp, act);
-		
 	}
 	
 	@After
