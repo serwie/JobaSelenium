@@ -79,7 +79,33 @@ public class EhcTests {
 	
 	@Test
 	public void testLogout(){ // TODO
-		fail("Not yet implemented!");
+		//fail("Not yet implemented!");
+		
+		driver.manage().window().maximize();
+			
+			// log in
+			WebElement email = driver.findElement(By.name("identity"));
+			email.sendKeys(config.username);
+			WebElement passwort = driver.findElement(By.name("credential"));
+			passwort.sendKeys(config.password);
+			passwort.submit();
+			
+			//scroll down to the button <<Ausloggen>>
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+	        js.executeScript("javascript:window.scrollBy(200,600)");
+	        
+	        // clik on button <<Ausloggen>>
+			WebElement btnAusloggen =  driver.findElement(By.linkText("Ausloggen"));
+			assertNotNull("testLogout", btnAusloggen); // assert that the button exists
+			btnAusloggen.click();
+			
+			// verify that the log in page  is shown 
+			String cssSelectorString = "h1";
+			WebElement contentH1 = driver.findElement(By.cssSelector(cssSelectorString));
+			String act = contentH1.getText();
+			String exp = "Einloggen";
+			
+			assertEquals("testLogout", exp, act);
 	}
 
 	@Test
